@@ -7,6 +7,7 @@ class checksum extends Thread{
 public void finaladd(ArrayList<Integer>help2,ArrayList<ArrayList<Integer>>arr) {
 	int n=arr.size();
 	ArrayList<Integer>help=new ArrayList<>();
+	
 	int carry=0;
 	for(int i=n-1;i>=0;i--)
 	{
@@ -70,10 +71,10 @@ public void finaladd(ArrayList<Integer>help2,ArrayList<ArrayList<Integer>>arr) {
 	System.out.println("Clear");
 }
 	
-	public void addarr(ArrayList<Integer>help,ArrayList<ArrayList<Integer>>arr)
+	public void addarr(ArrayList<Integer>finalhelp,ArrayList<ArrayList<Integer>>arr)
 	{
 		int n=arr.size();
-		//ArrayList<Integer>help=new ArrayList<>();
+		ArrayList<Integer>help=new ArrayList<>();
 		int carry=0;
 		for(int i=n-1;i>=0;i--)
 		{
@@ -98,6 +99,13 @@ public void finaladd(ArrayList<Integer>help2,ArrayList<ArrayList<Integer>>arr) {
 				carry=0;
 			}
 		}
+		for(int i=0;i<help.size();i++)
+		{
+			if(help.get(i)==0)
+				finalhelp.add(1);
+			else
+				finalhelp.add(0);
+		}
 		
 	}
 	public void run()
@@ -114,11 +122,11 @@ public void finaladd(ArrayList<Integer>help2,ArrayList<ArrayList<Integer>>arr) {
 			inp.add(c);}
 			arr.add(inp);
 		}
-		ArrayList<Integer>help=new ArrayList<>();
+		ArrayList<Integer>finalhelp=new ArrayList<>();
 		
-		addarr(help,arr);
+		addarr(finalhelp,arr);
 		
-		finaladd(help,arr);
+		finaladd(finalhelp,arr);
 		this.notify();
 		}
 	}
@@ -163,7 +171,7 @@ class LRC extends Thread{
 			int d=0;
 			for(int j=0;j<n;j++)
 			{
-				if(arr.get(j).get(i)==1)
+				if(arr.get(i).get(j)==1)
 				{
 					d++;
 				}	
@@ -225,7 +233,18 @@ class VRC extends Thread{
 			{
 				arr.add(1);
 			}
-		if(check(arr,d))
+			System.out.println("Enter the data to be sent");
+			System.out.println("Give Input");
+			int in;
+			in=p.nextInt();
+			ArrayList<Integer>sendata=new ArrayList<>();
+			for(int i=0;i<in;i++)
+			{
+				int g;
+				g=p.nextInt();
+				sendata.add(g);
+			}
+		if(check(sendata,d))
 			System.out.println("No error");
 		else
 			System.out.println("Error found");
@@ -250,3 +269,4 @@ public class Test {
 	}
 
 }
+
